@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,14 +14,14 @@ public class bubble {
 
     private static JFrame frame;
     private static JPanel panel;
-    private static JButton[] list = new JButton[25];
+    private static JPanel[] list = new JPanel[200];
 
     /*
      A simple program that implements bubble sort
     */
     public static void main(String[] args) {
         frame = new JFrame();
-        frame.setSize(new Dimension(650, 500));
+        frame.setSize(new Dimension(1025, 520));
         frame.setResizable(false);
         frame.setTitle("Bubble Sort");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,15 +47,15 @@ public class bubble {
         frame.setJMenuBar(menuBar);
 
         int x = 6;
-        for (int i = 0; i < 25; i++) {
-            int random = (int)(Math.random() * 500);
-            JButton temp = new JButton();
-            temp.setSize(20, random);
+        for (int i = 0; i < 200; i++) {
+            int random = (int)(Math.random() * 440);
+            JPanel temp = new JPanel();
+            temp.setSize(3, random);
             temp.setLocation(x, 0);
             temp.setBackground(Color.PINK);
             panel.add(temp);
             list[i] = temp;
-            x += 25;
+            x += 5;
         }
 
         frame.setVisible(true);
@@ -87,18 +86,24 @@ public class bubble {
             for (int i = 0; i < list.length - 1; i++) {
                 for (int j = 0; j < list.length - i - 1; j++) {
                     if (list[j].getHeight() > list[j + 1].getHeight()) {
-                        JButton temp = list[j];
+                        JPanel temp = list[j];
                         list[j] = list[j + 1];
                         list[j + 1] = temp;
                         //swap locations
                         Point temploc = list[j].getLocation();
+                        //list[j].setBackground(Color.RED);
+                        list[j].setLocation(list[j + 1].getLocation());
+                        list[j + 1].setBackground(Color.RED);
+                        list[j + 1].setLocation(temploc);
+                        
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(3);
                         } catch (InterruptedException ex) {
                             System.out.println("exception caught: " + ex);
                         } catch (NullPointerException e){}
-                        list[j].setLocation(list[j + 1].getLocation());
-                        list[j + 1].setLocation(temploc);
+
+                        list[j + 1].setBackground(Color.PINK);
+                        
                     }
                 }
             }
