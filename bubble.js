@@ -11,7 +11,7 @@ for (i = 0; i < 38; i++) {
     x += 21;
 }
 
-function bubbleSort() {
+async function bubbleSort() {
     for (let i = 0; i < list.length - 1; i++) {
         for (let j = 0; j < list.length - i - 1; j++) {
             if (list[j] > list[j + 1]) {
@@ -19,17 +19,28 @@ function bubbleSort() {
                 list[j] = list[j + 1];
                 list[j + 1] = temp;
                 repaint(list);
+                const result = await resolve();
             }
         }
     }
 }
 
+function resolve() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+      }, 200);
+    });
+  }
+
 function repaint(list) {
     ctx.clearRect(0, 0, c.width, c.height);
+    //ctx.fillStyle = "#FF0000";
     let k = 4;
     for (let i = 0; i < 38; i++) {
         ctx.fillRect(k, 4, 20, list[i]);
         k += 21;
     }
 }
+
 
