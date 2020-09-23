@@ -117,11 +117,18 @@ public class bubble {
                     }
                 }
             }
+            for (int i = 0; i < list.length; i++) {
+                list[i].setBackground(Color.GREEN);
+            }
         });
         thread.start();
+        
     }
 
     public static void unSort() {
+        for (int i = 0; i < list.length; i++) {
+            list[i].setBackground(Color.PINK);
+        }
         Thread thread = new Thread(() -> {
             for (int i = 0; i < 200; i++) {
                 int random = (int) (Math.random() * 440);
